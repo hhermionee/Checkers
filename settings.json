@@ -1,19 +1,19 @@
 {
     "WindowSize": {
-        "Width": 0,
-        "Hight": 0
+        "Width": 0,  // Ширина окна приложения. 0 означает, что приложение будет работать в полноэкранном режиме.
+        "Hight": 0   // Высота окна приложения. 0 также указывает на полноэкранный режим. (возможно, нуждается в исправлении на "Height")
     },
     "Bot": {
-        "IsWhiteBot": false,
-        "IsBlackBot": true,
-        "WhiteBotLevel": 0,
-        "BlackBotLevel": 5,
-        "BotScoringType": "NumberAndPotential",
-        "BotDelayMS": 0,
-        "NoRandom": false,
-        "Optimization": "O1"
+        "IsWhiteBot": false,  // Указывает, управляет ли бот белыми фигурами. false - игрок управляет белыми.
+        "IsBlackBot": true,   // Указывает, управляет ли бот черными фигурами. true - бот управляет черными.
+        "WhiteBotLevel": 0,   // Уровень сложности бота для белых. Чем выше значение, тем сложнее игра.
+        "BlackBotLevel": 5,   // Уровень сложности бота для черных.
+        "BotScoringType": "NumberAndPotential",  // Тип оценки для бота: "NumberOnly" или "NumberAndPotential".
+        "BotDelayMS": 0,      // Задержка в миллисекундах перед выполнением хода ботом.
+        "NoRandom": false,    // Если true, бот будет детерминированным, без случайности в выборе ходов.
+        "Optimization": "O1"  // Уровень оптимизации: "O0", "O1", "O2", влияет на производительность бота.
     },
     "Game": {
-        "MaxNumTurns": 120
+        "MaxNumTurns": 120  // Максимальное количество ходов в игре до объявления ничьей.
     }
 }

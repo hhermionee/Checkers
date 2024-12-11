@@ -11,7 +11,9 @@ class Hand
   public:
     Hand(Board *board) : board(board)
     {
+        // Конструктор принимает указатель на объект Board для взаимодействия с игровым полем.
     }
+
     tuple<Response, POS_T, POS_T> get_cell() const
     {
         SDL_Event windowEvent;
@@ -25,24 +27,24 @@ class Hand
                 switch (windowEvent.type)
                 {
                 case SDL_QUIT:
-                    resp = Response::QUIT;
+                    resp = Response::QUIT;  // Установка типа ответа QUIT при закрытии окна.
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     x = windowEvent.motion.x;
                     y = windowEvent.motion.y;
-                    xc = int(y / (board->H / 10) - 1);
+                    xc = int(y / (board->H / 10) - 1);  // Вычисление позиции клетки по клику мыши.
                     yc = int(x / (board->W / 10) - 1);
                     if (xc == -1 && yc == -1 && board->history_mtx.size() > 1)
                     {
-                        resp = Response::BACK;
+                        resp = Response::BACK;  // Установка типа ответа BACK для возврата хода.
                     }
                     else if (xc == -1 && yc == 8)
                     {
-                        resp = Response::REPLAY;
+                        resp = Response::REPLAY;  // Установка типа ответа REPLAY для перезапуска игры.
                     }
                     else if (xc >= 0 && xc < 8 && yc >= 0 && yc < 8)
                     {
-                        resp = Response::CELL;
+                        resp = Response::CELL;  // Установка типа ответа CELL для выбора клетки.
                     }
                     else
                     {
@@ -53,15 +55,15 @@ class Hand
                 case SDL_WINDOWEVENT:
                     if (windowEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
                     {
-                        board->reset_window_size();
+                        board->reset_window_size();  // Изменение размера окна вызывает обновление размеров доски.
                         break;
                     }
                 }
                 if (resp != Response::OK)
-                    break;
+                    break;  // Выход из цикла при получении любого ответа, кроме OK.
             }
         }
-        return {resp, xc, yc};
+        return {resp, xc, yc};  // Возврат типа ответа и выбранной позиции клетки.
     }
 
     Response wait() const
@@ -75,10 +77,10 @@ class Hand
                 switch (windowEvent.type)
                 {
                 case SDL_QUIT:
-                    resp = Response::QUIT;
+                    resp = Response::QUIT;  // Установка типа ответа QUIT при закрытии окна.
                     break;
                 case SDL_WINDOWEVENT_SIZE_CHANGED:
-                    board->reset_window_size();
+                    board->reset_window_size();  // Изменение размера окна вызывает обновление размеров доски.
                     break;
                 case SDL_MOUSEBUTTONDOWN: {
                     int x = windowEvent.motion.x;
@@ -86,17 +88,17 @@ class Hand
                     int xc = int(y / (board->H / 10) - 1);
                     int yc = int(x / (board->W / 10) - 1);
                     if (xc == -1 && yc == 8)
-                        resp = Response::REPLAY;
+                        resp = Response::REPLAY;  // Установка типа ответа REPLAY для перезапуска игры.
                 }
                 break;
                 }
                 if (resp != Response::OK)
-                    break;
+                    break;  // Выход из цикла при получении любого ответа, кроме OK.
             }
         }
-        return resp;
+        return resp;  // Возврат типа ответа.
     }
 
   private:
-    Board *board;
+    Board *board;  // Указатель на объект Board для взаимодействия с игровым полем.
 };
